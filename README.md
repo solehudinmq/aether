@@ -86,6 +86,59 @@ Parameter description :
 - limit (optional) = is a parameter that contains information about the amount of data that will be displayed. Example: 5.
 - order_by (optional) = is a parameter that contains information about how to order data. Example: 'asc' / 'desc'.
 
+Example of pagination cursor response : 
+```json
+{
+    "data": [
+        {
+            "id": 1,
+            "content": "Post 15",
+            "cursor_timestamp": 1756722028,
+            "created_at": "2025-09-01T10:20:28.708Z",
+            "updated_at": "2025-09-01T10:20:28.708Z"
+        },
+        {
+            "id": 2,
+            "content": "Post 14",
+            "cursor_timestamp": 1756722028,
+            "created_at": "2025-09-01T10:20:28.809Z",
+            "updated_at": "2025-09-01T10:20:28.809Z"
+        },
+        {
+            "id": 3,
+            "content": "Post 13",
+            "cursor_timestamp": 1756722028,
+            "created_at": "2025-09-01T10:20:28.910Z",
+            "updated_at": "2025-09-01T10:20:28.910Z"
+        },
+        {
+            "id": 4,
+            "content": "Post 12",
+            "cursor_timestamp": 1756722029,
+            "created_at": "2025-09-01T10:20:29.011Z",
+            "updated_at": "2025-09-01T10:20:29.011Z"
+        },
+        {
+            "id": 5,
+            "content": "Post 11",
+            "cursor_timestamp": 1756722029,
+            "created_at": "2025-09-01T10:20:29.111Z",
+            "updated_at": "2025-09-01T10:20:29.111Z"
+        }
+    ],
+    "next_cursor": {
+        "cursor_timestamp": 1756722029,
+        "cursor_id": 5,
+        "direction": "next"
+    },
+    "previous_cursor": {
+        "cursor_timestamp": 1756722028,
+        "cursor_id": 1,
+        "direction": "previous"
+    }
+}
+```
+
 How to fill in data for the cursor_timestamp column :
 
 ```ruby
