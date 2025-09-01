@@ -8,11 +8,11 @@ Gem::Specification.new do |spec|
   spec.authors = ["SolehMQ"]
   spec.email = ["solehudinmq@gmail.com"]
 
-  spec.summary = "TODO: Write a short summary, because RubyGems requires one."
-  spec.description = "TODO: Write a longer description or delete this line."
-  spec.homepage = "TODO: Put your gem's website or public repo URL here."
+  spec.summary = "Aether is a ruby ​​library for implementing cursor pagination, which is faster and more scalable than offset pagination."
+  spec.description = "With the Aether library, pagination with large datasets is no longer a bottleneck."
+  spec.homepage = "https://github.com/solehudinmq/aether"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 3.2.0"
+  spec.required_ruby_version = ">= 3.0.0"
 
   spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
   spec.metadata["homepage_uri"] = spec.homepage
