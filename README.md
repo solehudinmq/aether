@@ -90,7 +90,6 @@ How to fill in data for the cursor_timestamp column :
 
 ```ruby
     Post.create(content: "Test", cursor_timestamp: Time.now.to_i)
-end
 ```
 
 ## Development
