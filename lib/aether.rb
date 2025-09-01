@@ -34,14 +34,14 @@ module Aether extend ActiveSupport::Concern
           cursor_id
         )
       end
-
+      
       # Return n data according to limit parameter
       result = data.limit(limit)
 
       # Response for cursor pagination
       next_cursor = nil
       previous_cursor = nil
-      if result
+      if result.present?
         last_data = result.last
         next_cursor = {
           cursor_timestamp: last_data.cursor_timestamp,

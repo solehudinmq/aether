@@ -190,4 +190,27 @@ RSpec.describe Aether do
     expect(posts[:previous_cursor][:cursor_id]).to be data.first.id
     expect(posts[:previous_cursor][:direction]).to be 'previous'
   end
+
+  it 'return 0 data in asc order' do
+    first_call_posts = Post.cursor_paginate(cursor_timestamp: nil, cursor_id: nil, direction: nil, limit: 5, order_by: 'asc')
+
+    posts = Post.cursor_paginate(cursor_timestamp: first_call_posts[:previous_cursor][:cursor_timestamp], cursor_id: first_call_posts[:previous_cursor][:cursor_id], direction: first_call_posts[:previous_cursor][:direction], limit: 5, order_by: 'asc')
+    data = posts[:data]
+  
+    expect(data.length).to be 0
+
+    expect(posts[:next_cursor]).to be nil
+    expect(posts[:previous_cursor]).to be nil
+  end
+
+  it 'return 0 data in desc order' do
+    first_call_posts = Post.cursor_paginate(cursor_timestamp: nil, cursor_id: nil, direction: nil, limit: 5, order_by: 'desc')
+    posts = Post.cursor_paginate(cursor_timestamp: first_call_posts[:previous_cursor][:cursor_timestamp], cursor_id: first_call_posts[:previous_cursor][:cursor_id], direction: first_call_posts[:previous_cursor][:direction], limit: 5, order_by: 'desc')
+    data = posts[:data]
+  
+    expect(data.length).to be 0
+
+    expect(posts[:next_cursor]).to be nil
+    expect(posts[:previous_cursor]).to be nil
+  end
 end
