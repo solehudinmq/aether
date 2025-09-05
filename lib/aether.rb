@@ -15,7 +15,7 @@ module Aether extend ActiveSupport::Concern
       order_by ||= 'asc'
       
       # Validation for order_by parameter value
-      order_by_validator = OrderByValidator.validate(order_by)
+      OrderByValidator.validate(order_by)
 
       # Query sorted by asc/desc for column cursor_timestamp & cursor_id.
       data = order(cursor_timestamp: order_by, id: order_by)
@@ -23,7 +23,7 @@ module Aether extend ActiveSupport::Concern
       # If the cursor parameter is sent
       if cursor_timestamp && cursor_id && direction
         # Validation for direction parameter value
-        direction_validator = DirectionValidator.validate(direction)
+        DirectionValidator.validate(direction)
 
         query = find_by_cursor(direction, order_by)
 
