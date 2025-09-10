@@ -86,6 +86,32 @@ Parameter description :
 - limit (optional) = is a parameter that contains information about the amount of data that will be displayed. Example: 5.
 - order_by (optional) = is a parameter that contains information about how to order data. Example: 'asc' / 'desc'.
 
+Example of usage in your application :
+```ruby
+require 'sinatra'
+require 'json'
+require_relative 'post'
+
+get '/posts' do
+  begin
+    posts = Post.cursor_paginate(
+      cursor_timestamp: params[:cursor_timestamp],
+      cursor_id: params[:cursor_id],
+      direction: params[:direction],
+      limit: params[:limit],
+      order_by: params[:order_by]
+    )
+
+    content_type :json
+    posts.to_json
+  rescue => e
+    content_type :json
+    status 500
+    return { error: e.message }.to_json
+  end
+end
+```
+
 Example of pagination cursor response : 
 ```json
 {
