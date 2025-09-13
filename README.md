@@ -62,23 +62,21 @@ In the model that will implement cursor pagination add this :
 ```ruby
 require 'aether'
 
-class Post < ActiveRecord::Base
+class YourModel < ActiveRecord::Base
   include Aether
 end
 ```
 
 How to use cursor pagination :
-
 ```ruby
-posts = Post.cursor_paginate(
-    cursor_timestamp: params[:cursor_timestamp],
-    cursor_id: params[:cursor_id],
-    direction: params[:direction],
-    limit: params[:limit],
-    order_by: params[:order_by]
+result = YourModel.cursor_paginate(
+    cursor_timestamp: 1756722029,
+    cursor_id: 5,
+    direction: 'next',
+    limit: 10,
+    order_by: 'asc'
 )
 ```
-
 Parameter description :
 - cursor_timestamp (optional) : is a parameter that contains cursor timestamp information in the form of an epoch timestamp. Example: 1756722030.
 - cursor_id (optional) = is a parameter that contains cursor ID information. Example: 5.
@@ -86,8 +84,24 @@ Parameter description :
 - limit (optional) = is a parameter that contains information about the amount of data that will be displayed. Example: 5.
 - order_by (optional) = is a parameter that contains information about how to order data. Example: 'asc' / 'desc'.
 
+How to fill in data for the cursor_timestamp column :
+
+```ruby
+  Post.create(content: "Test", cursor_timestamp: Time.now.to_i)
+```
+
 Example of usage in your application :
 ```ruby
+# post.rb
+require 'aether'
+
+class Post < ActiveRecord::Base
+  include Aether
+end
+```
+
+```ruby
+# app.rb
 require 'sinatra'
 require 'json'
 require_relative 'post'
@@ -163,12 +177,6 @@ Example of pagination cursor response :
         "direction": "previous"
     }
 }
-```
-
-How to fill in data for the cursor_timestamp column :
-
-```ruby
-    Post.create(content: "Test", cursor_timestamp: Time.now.to_i)
 ```
 
 ## Development
