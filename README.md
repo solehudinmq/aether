@@ -32,6 +32,18 @@ bundle install
 Make sure that in the table where you will implement cursor pagination, there are columns named id and cursor_timestamp, where the cursor_timestamp column contains the epoch timestamp. Example of creating a table with cursor_timestamp column in PostgreSQL database :
 
 ```bash
+CREATE TABLE your_table (
+  id SERIAL PRIMARY KEY,
+  column1 VARCHAR(255) NOT NULL,
+  column2 TEXT,
+  cursor_timestamp INTEGER NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+```
+
+Example : 
+
+```bash
 CREATE TABLE posts (
   id SERIAL PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
@@ -44,11 +56,25 @@ CREATE TABLE posts (
 Or if the table already exists, you can do an alter table like the following example :
 
 ```bash
+ALTER TABLE your_table
+ADD COLUMN cursor_timestamp INTEGER NOT NULL;
+```
+
+Example : 
+
+```bash
 ALTER TABLE posts
 ADD COLUMN cursor_timestamp INTEGER NOT NULL;
 ```
 
 To speed up query performance, we can add indexing for cursor_timestamp and id. Example of creating an index for a PostgreSQL database :
+
+```bash
+CREATE INDEX idx_your_table_on_cursor_timestamp_and_id
+ON your_table (cursor_timestamp, id);
+```
+
+Example : 
 
 ```bash
 CREATE INDEX idx_posts_on_cursor_timestamp_and_id
