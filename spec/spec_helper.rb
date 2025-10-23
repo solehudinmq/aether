@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'byebug'
-require_relative '../example/test/post'
+require_relative '../example/post'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

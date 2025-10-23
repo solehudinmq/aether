@@ -2,13 +2,10 @@
 require 'active_support/concern'
 
 require_relative "aether/version"
-require_relative "aether/strategies/direction_validator"
-require_relative "aether/strategies/order_by_validator"
+require_relative "aether/validator/direction_validator"
+require_relative "aether/validator/order_by_validator"
 
 module Aether extend ActiveSupport::Concern
-  class Error < StandardError; end
-  # Your code goes here...
-
   class_methods do
     def cursor_paginate(cursor_timestamp: nil, cursor_id: nil, direction: nil, limit: nil, order_by: nil)
       limit ||= 10

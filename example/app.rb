@@ -25,7 +25,7 @@ get '/posts' do
 end
 
 # Route to enter dummy data
-get '/seed' do
+post '/seed' do
   # Delete old data and enter new data
   Post.destroy_all
   15.times do |i|

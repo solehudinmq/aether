@@ -117,21 +117,63 @@ How to fill in data for the cursor_timestamp column :
 ```
 
 Example of usage in your application :
+- Gemfile : 
+```ruby
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+
+gem "sqlite3"
+gem "sinatra"
+gem "activerecord"
+gem "byebug"
+gem 'aether', git: 'git@github.com:solehudinmq/aether.git', branch: 'main'
+gem "rackup", "~> 2.2"
+gem "puma", "~> 6.6"
+```
+
+- post.rb : 
 ```ruby
 # post.rb
+require 'sinatra'
+require 'active_record'
 require 'aether'
 
+# Configure database connections
+ActiveRecord::Base.establish_connection(
+  adapter: 'sqlite3',
+  database: 'db/development.sqlite3'
+)
+
+# Create a db directory if it doesn't exist yet
+Dir.mkdir('db') unless File.directory?('db')
+
+# Model
 class Post < ActiveRecord::Base
   include Aether
 end
+
+# Migration to create posts table
+ActiveRecord::Schema.define do
+  unless ActiveRecord::Base.connection.table_exists?(:posts)
+    create_table :posts do |t|
+      t.string :content
+      t.integer :cursor_timestamp
+      t.timestamps
+    end
+  end
+end
 ```
 
+- app.rb : 
 ```ruby
 # app.rb
 require 'sinatra'
 require 'json'
+require 'byebug'
 require_relative 'post'
 
+# Route to fetch posts data with cursor pagination
 get '/posts' do
   begin
     posts = Post.cursor_paginate(
@@ -150,6 +192,26 @@ get '/posts' do
     return { error: e.message }.to_json
   end
 end
+
+# Route to enter dummy data
+post '/seed' do
+  # Delete old data and enter new data
+  Post.destroy_all
+  15.times do |i|
+    Post.create(content: "Post #{15-i}", cursor_timestamp: Time.now.to_i)
+    sleep(0.1) # Add a gap to make the created_at different
+  end
+  'Database seeded with 15 posts.'
+end
+
+# open terminal
+# cd your_project
+# bundle install
+# bundle exec ruby app.rb
+# curl --location --request POST 'http://localhost:4567/seed' // untuk create dummy data
+# curl --location 'http://localhost:4567/posts?limit=5&order_by=asc' // untuk dapat halaman 1
+# curl --location 'http://localhost:4567/posts?limit=5&cursor_timestamp=1756722029&cursor_id=5&direction=next&order_by=asc' // untuk dapat di halaman berikutnya
+# curl --location 'http://localhost:4567/posts?limit=5&cursor_timestamp=1756722029&cursor_id=6&direction=previous&order_by=asc' // untuk dapat di halaman sebelumnya
 ```
 
 Example of pagination cursor response : 
@@ -204,12 +266,6 @@ Example of pagination cursor response :
     }
 }
 ```
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
