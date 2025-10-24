@@ -93,14 +93,23 @@ class YourModel < ActiveRecord::Base
 end
 ```
 
+Example : 
+```ruby
+require 'aether'
+
+class Post < ActiveRecord::Base
+  include Aether
+end
+```
+
 How to use cursor pagination :
 ```ruby
 result = YourModel.cursor_paginate(
-    cursor_timestamp: 1756722029,
-    cursor_id: 5,
-    direction: 'next',
-    limit: 10,
-    order_by: 'asc'
+  cursor_timestamp: cursor_timestamp,
+  cursor_id: cursor_id,
+  direction: direction,
+  limit: limit,
+  order_by: order_by
 )
 ```
 Parameter description :
@@ -110,7 +119,24 @@ Parameter description :
 - limit (optional) = is a parameter that contains information about the amount of data that will be displayed. Example: 5.
 - order_by (optional) = is a parameter that contains information about how to order data. Example: 'asc' / 'desc'.
 
+Example : 
+```ruby
+Post.cursor_paginate(
+  cursor_timestamp: 1756722029,
+  cursor_id: 5,
+  direction: 'next',
+  limit: 10,
+  order_by: 'asc'
+)
+```
+
 How to fill in data for the cursor_timestamp column :
+
+```ruby
+  YourModel.create(column1: "value1", cursor_timestamp: Time.now.to_i)
+```
+
+Example :
 
 ```ruby
   Post.create(content: "Test", cursor_timestamp: Time.now.to_i)
