@@ -117,8 +117,8 @@ How to fill in data for the cursor_timestamp column :
 ```
 
 Example of usage in your application :
-- Gemfile : 
 ```ruby
+# Gemfile
 # frozen_string_literal: true
 
 source "https://rubygems.org"
@@ -132,7 +132,6 @@ gem "rackup", "~> 2.2"
 gem "puma", "~> 6.6"
 ```
 
-- post.rb : 
 ```ruby
 # post.rb
 require 'sinatra'
@@ -165,7 +164,6 @@ ActiveRecord::Schema.define do
 end
 ```
 
-- app.rb : 
 ```ruby
 # app.rb
 require 'sinatra'
