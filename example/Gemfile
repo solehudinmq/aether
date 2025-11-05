@@ -6,7 +6,6 @@ source "https://rubygems.org"
 
 gem "sqlite3"
 gem "sinatra"
-gem "activerecord"
 gem "byebug"
 # gem 'aether', path: '../aether' # for test in localhost
 gem 'aether', git: 'git@github.com:solehudinmq/aether.git', branch: 'main'
