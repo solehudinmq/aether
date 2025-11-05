@@ -53,7 +53,7 @@ CREATE TABLE your_table (
 );
 ```
 
-For more details, you can see the following example : [example/new_table.txt](Here).
+For more details, you can see the following example : [example/new_table.txt](https://github.com/solehudinmq/aether/blob/development/example/new_table.txt).
 
 Or if the table already exists, you can do an alter table like the following example :
 
@@ -62,7 +62,7 @@ ALTER TABLE your_table
 ADD COLUMN cursor_timestamp INTEGER NOT NULL;
 ```
 
-For more details, you can see the following example : [example/existing_table.txt](Here).
+For more details, you can see the following example : [example/existing_table.txt](https://github.com/solehudinmq/aether/blob/development/example/existing_table.txt).
 
 ## Create Index
 
@@ -73,7 +73,7 @@ CREATE INDEX idx_your_table_on_cursor_timestamp_and_id
 ON your_table (cursor_timestamp, id);
 ```
 
-For more details, you can see the following example : [example/post_index.txt](Here).
+For more details, you can see the following example : [example/post_index.txt](https://github.com/solehudinmq/aether/blob/development/example/post_index.txt).
 
 ## Usage
 
@@ -87,7 +87,7 @@ class YourModel < ActiveRecord::Base
 end
 ```
 
-For more details, you can see the following example : [example/post.rb](Here).
+For more details, you can see the following example : [example/post.rb](https://github.com/solehudinmq/aether/blob/development/example/post.rb).
 
 How to use cursor pagination :
 
@@ -107,7 +107,7 @@ Parameter description :
 - limit (optional) = is a parameter that contains information about the amount of data that will be displayed. Example: 5.
 - order_by (optional) = is a parameter that contains information about how to order data. Example: 'asc' / 'desc'.
 
-For more details, you can see the following example : [example/app.rb](Here).
+For more details, you can see the following example : [example/app.rb](https://github.com/solehudinmq/aether/blob/development/example/app.rb).
 
 ## Column cursor_timestamp Values
 
@@ -119,11 +119,11 @@ How to fill in data for the cursor_timestamp column :
 
 ## Example Implementation in Your Application
 
-For examples of applications that use this gem, you can see them here : [example](Here).
+For examples of applications that use this gem, you can see them here : [example](https://github.com/solehudinmq/aether/tree/development/example).
 
 ## Example of Cursor Pagination Response
 
-For examples of applications that use this gem, you can see them here : [example/response.json](Here).
+For examples of applications that use this gem, you can see them here : [example/response.json](https://github.com/solehudinmq/aether/blob/development/example/response.json).
 
 ## Contributing
 
