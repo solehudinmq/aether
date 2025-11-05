@@ -1,0 +1,2 @@
+CREATE INDEX idx_posts_on_cursor_timestamp_and_id
+ON posts (cursor_timestamp, id);
