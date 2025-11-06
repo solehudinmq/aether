@@ -121,6 +121,26 @@ How to fill in data for the cursor_timestamp column :
 
 For examples of applications that use this gem, you can see them here : [example](https://github.com/solehudinmq/aether/tree/development/example).
 
+## Example of Calling the API with Curl
+
+- Example of getting the first data :
+
+```bash
+curl --location 'http://localhost:4567/posts?limit=5&order_by=asc'
+```
+
+- Example of getting the next data : 
+
+```bash
+curl --location 'http://localhost:4567/posts?limit=5&cursor_timestamp=1756722029&cursor_id=5&direction=next&order_by=asc'
+```
+
+- Example of getting previous data :
+
+```bash
+curl --location 'http://localhost:4567/posts?limit=5&cursor_timestamp=1761240952&cursor_id=21&direction=previous&order_by=asc'
+```
+
 ## Example of Cursor Pagination Response
 
 For examples of applications that use this gem, you can see them here : [example/response.json](https://github.com/solehudinmq/aether/blob/development/example/response.json).
