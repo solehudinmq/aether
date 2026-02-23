@@ -8,11 +8,11 @@ With the Aether library, pagination with large datasets is no longer a bottlenec
 
 Potential problems when using offset pagination : 
 
-![Logo Ruby](https://github.com/solehudinmq/aether/blob/development/high_flow/Aether-problem.jpg)
+![Logo Ruby](./high_flow/Aether-problem.jpg)
 
 Cursor pagination is a solution for implementing pagination for large data :
 
-![Logo Ruby](https://github.com/solehudinmq/aether/blob/development/high_flow/Aether-solution.jpg)
+![Logo Ruby](./high_flow/Aether-solution.jpg)
 
 ## Requirement
 
@@ -53,7 +53,7 @@ CREATE TABLE your_table (
 );
 ```
 
-For more details, you can see the following example : [example/new_table.txt](https://github.com/solehudinmq/aether/blob/development/example/new_table.txt).
+For more details, you can see the following example : [example/new_table.txt](./example/new_table.txt).
 
 Or if the table already exists, you can do an alter table like the following example :
 
@@ -62,7 +62,7 @@ ALTER TABLE your_table
 ADD COLUMN cursor_timestamp INTEGER NOT NULL;
 ```
 
-For more details, you can see the following example : [example/existing_table.txt](https://github.com/solehudinmq/aether/blob/development/example/existing_table.txt).
+For more details, you can see the following example : [example/existing_table.txt](./example/existing_table.txt).
 
 ## Create Index
 
@@ -73,7 +73,7 @@ CREATE INDEX idx_your_table_on_cursor_timestamp_and_id
 ON your_table (cursor_timestamp, id);
 ```
 
-For more details, you can see the following example : [example/post_index.txt](https://github.com/solehudinmq/aether/blob/development/example/post_index.txt).
+For more details, you can see the following example : [example/post_index.txt](./example/post_index.txt).
 
 ## Usage
 
@@ -87,7 +87,7 @@ class YourModel < ActiveRecord::Base
 end
 ```
 
-For more details, you can see the following example : [example/post.rb](https://github.com/solehudinmq/aether/blob/development/example/post.rb).
+For more details, you can see the following example : [example/post.rb](./example/post.rb).
 
 How to use cursor pagination :
 
@@ -107,7 +107,7 @@ Parameter description :
 - limit (optional) = is a parameter that contains information about the amount of data that will be displayed. Example: 5.
 - order_by (optional) = is a parameter that contains information about how to order data. Example: 'asc' / 'desc'.
 
-For more details, you can see the following example : [example/app.rb](https://github.com/solehudinmq/aether/blob/development/example/app.rb).
+For more details, you can see the following example : [example/app.rb](./example/app.rb).
 
 ## Column cursor_timestamp Values
 
@@ -119,7 +119,7 @@ How to fill in data for the cursor_timestamp column :
 
 ## Example Implementation in Your Application
 
-For examples of applications that use this gem, you can see them here : [example](https://github.com/solehudinmq/aether/tree/development/example).
+For examples of applications that use this gem, you can see them here : [example](./example).
 
 ## Example of Calling the API with Curl
 
@@ -143,7 +143,7 @@ curl --location 'http://localhost:4567/posts?limit=5&cursor_timestamp=1761240952
 
 ## Example of Cursor Pagination Response
 
-For examples of applications that use this gem, you can see them here : [example/response.json](https://github.com/solehudinmq/aether/blob/development/example/response.json).
+For examples of applications that use this gem, you can see them here : [example/response.json](./example/response.json).
 
 ## Contributing
 
